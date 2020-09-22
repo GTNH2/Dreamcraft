@@ -13,7 +13,6 @@ import com.dreammaster.gthandler.CoreMod_ProcessingArrayRecipeLoader;
 import com.dreammaster.gthandler.GT_CoreModSupport;
 import com.dreammaster.gthandler.GT_CustomLoader;
 import com.dreammaster.gthandler.GT_Loader_ItemPipes;
-import com.dreammaster.item.ItemList;
 import com.dreammaster.lib.Refstrings;
 import com.dreammaster.loginhandler.LoginHandler;
 import com.dreammaster.modbabychest.BlockBabyChest;
@@ -37,10 +36,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -52,6 +48,7 @@ import eu.usrv.yamcore.client.NotificationTickHandler;
 import eu.usrv.yamcore.creativetabs.CreativeTabsManager;
 import eu.usrv.yamcore.fluids.ModFluidManager;
 import eu.usrv.yamcore.items.ModItemManager;
+import eu.usrv.yamcore.items.ModMultiBaseItem;
 import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.Materials;
@@ -75,7 +72,7 @@ import static gregtech.api.enums.Dyes.MACHINE_METAL;
         version = Refstrings.VERSION,
         dependencies = 
         	"required-after:Forge@[10.13.2.1291,);"
-        +	"required-after:YAMCore@[0.5.76,);" 
+        +	"required-after:YAMCore@[0.6.0,);"
         +	"required-after:Baubles@[1.0.1.10,);"
 		+   "after:EnderIO;"
         +   "after:HardcoreEnderExpansion;",
@@ -105,6 +102,7 @@ public class MainRegistry
     public static LogHelper Logger = new LogHelper(Refstrings.MODID);
     private static SpaceDimRegisterer SpaceDimReg;
     private static BacteriaRegistry BacteriaRegistry;
+    public static ModMultiBaseItem MultiBaseItem;
 
     public static void AddLoginError(String pMessage)
     {
@@ -169,9 +167,8 @@ public class MainRegistry
         // ------------------------------------------------------------
 
         // ------------------------------------------------------------
-        Logger.debug("PRELOAD Init Tabmanager");
+        Logger.debug("PRELOAD Create Tabmanager");
         TabManager = new CreativeTabsManager();
-        ModTabList.InitModTabs(TabManager, ItemManager);
         // ------------------------------------------------------------
 
         //Materials init
@@ -181,11 +178,16 @@ public class MainRegistry
 
         // ------------------------------------------------------------
         Logger.debug("PRELOAD Create Items");
-        if (!ItemList.AddToItemManager(ItemManager))
-        {
-            Logger.warn("Some items failed to register. Check the logfile for details");
-            AddLoginError("[CoreMod-Items] Some items failed to register. Check the logfile for details");
-        }
+        MultiBaseItem = new ModMultiBaseItem(Refstrings.MODID, "dreamcraft.MultiItem.0", TabManager);
+
+        Logger.debug("PRELOAD Init Tabmanager");
+        ModTabList.InitModTabs(TabManager, ItemManager);
+
+        //if (!ItemList.AddToItemManager(ItemManager))
+        //{
+        //    Logger.warn("Some items failed to register. Check the logfile for details");
+        //    AddLoginError("[CoreMod-Items] Some items failed to register. Check the logfile for details");
+        //}
         // ------------------------------------------------------------
 
         // ------------------------------------------------------------
@@ -240,9 +242,9 @@ public class MainRegistry
         }
         // ------------------------------------------------------------
 
-        // register final list with valid items to forge
-        Logger.debug("LOAD Register Items");
-        ItemManager.RegisterItems(TabManager);
+        //register final list with valid items to forge
+        //Logger.debug("LOAD Register Items");
+        //ItemManager.RegisterItems(TabManager);
 
         Logger.debug("LOAD Register Blocks");
         BlockManager.RegisterItems(TabManager);

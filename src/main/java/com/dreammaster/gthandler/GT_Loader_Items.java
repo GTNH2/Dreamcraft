@@ -1,7 +1,9 @@
 package com.dreammaster.gthandler;
 
 import com.dreammaster.item.ItemList;
+import eu.usrv.yamcore.items.ItemMultiBase;
 import gregtech.common.items.GT_MetaGenerated_Item_01;
+import net.minecraft.item.ItemStack;
 
 
 public class GT_Loader_Items
@@ -362,16 +364,11 @@ public class GT_Loader_Items
 		CustomItemList.CoinSpaceII.set(ItemList.CoinSpaceII.getIS());
 		CustomItemList.CoinSpaceIII.set(ItemList.CoinSpaceIII.getIS());
 		CustomItemList.CoinSpaceIV.set(ItemList.CoinSpaceIV.getIS());
-		CustomItemList.CoinChunkloaderTierI.set(ItemList.CoinChunkloaderTierI.getIS());
-		CustomItemList.CoinChunkloaderTierI.getItem().setMaxStackSize(4);
-		CustomItemList.CoinChunkloaderTierII.set(ItemList.CoinChunkloaderTierII.getIS());
-		CustomItemList.CoinChunkloaderTierII.getItem().setMaxStackSize(4);
-		CustomItemList.CoinChunkloaderTierIII.set(ItemList.CoinChunkloaderTierIII.getIS());
-		CustomItemList.CoinChunkloaderTierIII.getItem().setMaxStackSize(4);
-		CustomItemList.CoinChunkloaderTierIV.set(ItemList.CoinChunkloaderTierIV.getIS());
-		CustomItemList.CoinChunkloaderTierIV.getItem().setMaxStackSize(4);
-		CustomItemList.CoinChunkloaderTierV.set(ItemList.CoinChunkloaderTierV.getIS());
-		CustomItemList.CoinChunkloaderTierV.getItem().setMaxStackSize(4);
+		CustomItemList.CoinChunkloaderTierI.set(setMaxStackSize(ItemList.CoinChunkloaderTierI,4));
+		CustomItemList.CoinChunkloaderTierII.set(setMaxStackSize(ItemList.CoinChunkloaderTierII,4));
+		CustomItemList.CoinChunkloaderTierIII.set(setMaxStackSize(ItemList.CoinChunkloaderTierIII,4));
+		CustomItemList.CoinChunkloaderTierIV.set(setMaxStackSize(ItemList.CoinChunkloaderTierIV,4));
+		CustomItemList.CoinChunkloaderTierV.set(setMaxStackSize(ItemList.CoinChunkloaderTierV,4));
 		CustomItemList.CoinChemist.set(ItemList.CoinChemist.getIS());
 		CustomItemList.CoinChemistI.set(ItemList.CoinChemistI.getIS());
 		CustomItemList.CoinChemistII.set(ItemList.CoinChemistII.getIS());
@@ -523,16 +520,11 @@ public class GT_Loader_Items
 		CustomItemList.AdvancedCokeOvenBrickDust.set(ItemList.AdvancedCokeOvenBrickDust.getIS());
 		CustomItemList.CokeOvenBrick.set(ItemList.CokeOvenBrick.getIS());
 		CustomItemList.CokeOvenBrickDust.set(ItemList.CokeOvenBrickDust.getIS());
-		CustomItemList.MedalDerp.set(ItemList.MedalDerp.getIS());
-		CustomItemList.MedalDerp.getItem().setMaxStackSize(1);
-		CustomItemList.MedalGTExplosion.set(ItemList.MedalGTExplosion.getIS());
-		CustomItemList.MedalGTExplosion.getItem().setMaxStackSize(1);
-		CustomItemList.MedalBuilder.set(ItemList.MedalBuilder.getIS());
-		CustomItemList.MedalBuilder.getItem().setMaxStackSize(1);
-		CustomItemList.MedalEngineer.set(ItemList.MedalEngineer.getIS());
-		CustomItemList.MedalEngineer.getItem().setMaxStackSize(1);
-		CustomItemList.MedalWarp.set(ItemList.MedalWarp.getIS());
-		CustomItemList.MedalWarp.getItem().setMaxStackSize(1);
+		CustomItemList.MedalDerp.set(setMaxStackSize(ItemList.MedalDerp,1));
+		CustomItemList.MedalGTExplosion.set(setMaxStackSize(ItemList.MedalGTExplosion,1));
+		CustomItemList.MedalBuilder.set(setMaxStackSize(ItemList.MedalBuilder,1));
+		CustomItemList.MedalEngineer.set(setMaxStackSize(ItemList.MedalEngineer,1));
+		CustomItemList.MedalWarp.set(setMaxStackSize(ItemList.MedalWarp,1));
 		CustomItemList.AluminoSilicateWool.set(ItemList.AluminoSilicateWool.getIS());
 		CustomItemList.MaceratedPlantmass.set(ItemList.MaceratedPlantmass.getIS());
 		CustomItemList.BedrockiumPlate.set(ItemList.BedrockiumPlate.getIS());
@@ -593,6 +585,11 @@ public class GT_Loader_Items
 		CustomItemList.RuneOfMagicFragment.set(ItemList.RuneOfMagicFragment.getIS());
 		CustomItemList.RuneOfVoidFragment.set(ItemList.RuneOfVoidFragment.getIS());
 		CustomItemList.Display.set(ItemList.Display.getIS());
+	}
 
+	private ItemStack setMaxStackSize(ItemList list, int stackSize){
+		ItemStack stack = list.getIS();
+		((ItemMultiBase)stack.getItem()).setMaxStackSize(stack.getItemDamage(), stackSize);
+		return stack;
 	}
 }
