@@ -17,9 +17,14 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        //Defaults to Java 8 & UTF-8 encoding
+        classpath 'com.github.GTNH2:ForgeGradle:061ac05b6c'
         classpath "de.undercouch:gradle-download-task:3.1.2"
     }
 }
@@ -30,8 +35,7 @@ apply plugin: 'signing'
 
 allprojects {
     apply plugin: 'java'
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+
 }
 
 file "build.properties" withReader {
@@ -180,20 +184,20 @@ task getBartworks(type: Download, dependsOn: "getRailCraft") {
     mustRunAfter "deobfBinJar"
     mustRunAfter "repackMinecraft"
 }
-task getGtPlusPlus(type: Download, dependsOn: "getBartworks") {
-    onlyIf {
-        !file("libs/GT-PlusPlus-1.7.05.53").exists()
-    }
-    src 'http://downloads.gtnewhorizons.com/Mods_for_Jenkins/GT-PlusPlus-1.7.05.53.jar'
-    dest file("libs/GT-PlusPlus-1.7.05.53.jar")
-    mustRunAfter "deobfBinJar"
-    mustRunAfter "repackMinecraft"
-}
+//task getGtPlusPlus(type: Download, dependsOn: "getBartworks") {
+  //  onlyIf {
+  //      !file("libs/GT-PlusPlus-1.7.05.68").exists()
+  //  }
+    //src 'http://downloads.gtnewhorizons.com/Mods_for_Jenkins/GT-PlusPlus-1.7.05.68.jar'
+    //dest file("libs/GT-PlusPlus-1.7.05.68.jar")
+ //   mustRunAfter "deobfBinJar"
+ //   mustRunAfter "repackMinecraft"
+//}
 
-tasks.setupCIWorkspace.dependsOn getGtPlusPlus
-tasks.setupDevWorkspace.dependsOn getGtPlusPlus
-tasks.setupDecompWorkspace.dependsOn getGtPlusPlus
-tasks.compileJava.dependsOn getGtPlusPlus
+tasks.setupCIWorkspace.dependsOn getBartworks
+tasks.setupDevWorkspace.dependsOn getBartworks
+tasks.setupDecompWorkspace.dependsOn getBartworks
+tasks.compileJava.dependsOn getBartworks
 
 processResources
 {

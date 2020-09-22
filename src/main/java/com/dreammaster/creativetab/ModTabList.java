@@ -2,6 +2,8 @@ package com.dreammaster.creativetab;
 
 import com.dreammaster.gthandler.CustomItemList;
 import com.dreammaster.item.ItemList;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eu.usrv.yamcore.creativetabs.CreativeTabsManager;
 import eu.usrv.yamcore.creativetabs.ModCreativeTab;
 import eu.usrv.yamcore.items.ModItemManager;
@@ -32,17 +34,17 @@ public final class ModTabList {
 
     public static void InitModTabs(CreativeTabsManager pTabManager, ModItemManager pItemManager)
 	{
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModGenericTab, ItemList.AsteroidsStoneDust.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModShapesTab, ItemList.ShapeBlock.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModMoldsTab, ItemList.MoldFormAnvil.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModThaumcraftTab, ItemList.ChargedVoidWandCap.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModCircuitsTab, ItemList.QuantumCircuit.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModFluidsTab, Items.bucket));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModBlocksTab, Item.getItemFromBlock(Blocks.stone)));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModSpaceTab, ItemList.HeavyDutyNoseConeTier3.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModSolarTab, ItemList.EnrichedNaquadriaNeutroniumSunnariumAlloy.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModBarsAndCasingsTab, ItemList.ChromeBars.Item.getConstructedItem()));
-		pTabManager.AddCreativeTab(new ModCreativeTab(ModAdditionsToGregTechTab, ItemList.EtchedLudicrousVoltageWiring.Item.getConstructedItem()){
+		pTabManager.AddCreativeTab(new CustomModTab(ModGenericTab, ItemList.AsteroidsStoneDust.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModShapesTab, ItemList.ShapeBlock.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModMoldsTab, ItemList.MoldFormAnvil.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModThaumcraftTab, ItemList.ChargedVoidWandCap.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModCircuitsTab, ItemList.QuantumCircuit.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModFluidsTab, Items.bucket));
+		pTabManager.AddCreativeTab(new CustomModTab(ModBlocksTab, Item.getItemFromBlock(Blocks.stone)));
+		pTabManager.AddCreativeTab(new CustomModTab(ModSpaceTab, ItemList.HeavyDutyNoseConeTier3.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModSolarTab, ItemList.EnrichedNaquadriaNeutroniumSunnariumAlloy.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModBarsAndCasingsTab, ItemList.ChromeBars.getIS()));
+		pTabManager.AddCreativeTab(new CustomModTab(ModAdditionsToGregTechTab, ItemList.EtchedLudicrousVoltageWiring.getIS()){
 			@Override
 			public void displayAllReleventItems(List stuffToShow) {
 				//casing adder
@@ -61,5 +63,25 @@ public final class ModTabList {
 				super.displayAllReleventItems(stuffToShow);
 			}
 		});
+	}
+	static class CustomModTab extends ModCreativeTab {
+
+    	ItemStack ref;
+
+		public CustomModTab(String lable, Item stack) {
+			super(lable,stack);
+			this.ref = new ItemStack(stack);
+		}
+
+		public CustomModTab(String lable, ItemStack stack) {
+			super(lable,stack.getItem());
+			this.ref = stack;
+		}
+
+		@Override
+		@SideOnly(Side.CLIENT)
+		public int func_151243_f() {
+			return ref.getItemDamage();
+		}
 	}
 }
