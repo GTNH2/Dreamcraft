@@ -32,7 +32,7 @@ public class GT_Loader_Machines
 	{
 		long bitsd = GT_ModHandler.RecipeBits.DISMANTLEABLE | GT_ModHandler.RecipeBits.NOT_REMOVABLE
 				| GT_ModHandler.RecipeBits.REVERSIBLE | GT_ModHandler.RecipeBits.BUFFERED;
-		
+
 		//TODO:While adding recipes look at GT_Loader_MetaTileEntities there is some useful info
 		//TODO:Add recipes where u see //TODO:recipes or null in the code
 
@@ -1540,11 +1540,11 @@ public class GT_Loader_Machines
 		// ===================================================================================================
 		// MassFabricatorLuV
 		// ===================================================================================================
-		ItemList.Machine_LuV_Massfab.set(new GT_MetaTileEntity_Massfabricator(
+		CustomItemList.MassFabricatorLuV.set(new GT_MetaTileEntity_Massfabricator(
 				10950, "basicmachine.massfab.tier.06", "Elite Mass Fabricator", 6).getStackForm(1L));
-		ItemList.Machine_ZPM_Massfab.set(new GT_MetaTileEntity_Massfabricator(
+		CustomItemList.MassFabricatorZPM.set(new GT_MetaTileEntity_Massfabricator(
 				10951, "basicmachine.massfab.tier.07", "Elite Mass Fabricator II", 7).getStackForm(1L));
-		ItemList.Machine_UV_Massfab.set(new GT_MetaTileEntity_Massfabricator(
+		CustomItemList.MassFabricatorUV.set(new GT_MetaTileEntity_Massfabricator(
 				10952, "basicmachine.massfab.tier.08", "Ultimate Existence Initiator", 8).getStackForm(1L));
 		CustomItemList.MassFabricatorUHV.set(new GT_MetaTileEntity_Massfabricator(
 				10953, "basicmachine.massfab.tier.09", "Epic Existence Initiator", 9).getStackForm(1L));
@@ -1555,7 +1555,7 @@ public class GT_Loader_Machines
 		CustomItemList.MassFabricatorUMV.set(new GT_MetaTileEntity_Massfabricator(
 				10956, "basicmachine.massfab.tier.12", "Epic Existence Initiator IV",12).getStackForm(1L));
 
-		GT_ModHandler.addCraftingRecipe(ItemList.Machine_LuV_Massfab.get(1L),
+		GT_ModHandler.addCraftingRecipe(CustomItemList.MassFabricatorLuV.get(1L),
 				bitsd,
 				new Object[] { "CFC", "WMW", "CFC",
 						'M', ItemList.Hull_LuV,
@@ -1563,7 +1563,7 @@ public class GT_Loader_Machines
 						'C', GT_CustomLoader.AdvancedGTMaterials.LuV.getCircuit(),
 						'W', GT_CustomLoader.AdvancedGTMaterials.LuV.getCable4()});
 
-		GT_ModHandler.addCraftingRecipe(ItemList.Machine_ZPM_Massfab.get(1L),
+		GT_ModHandler.addCraftingRecipe(CustomItemList.MassFabricatorZPM.get(1L),
 				bitsd,
 				new Object[] { "CFC", "WMW", "CFC",
 						'M', ItemList.Hull_ZPM,
@@ -1571,7 +1571,7 @@ public class GT_Loader_Machines
 						'C', GT_CustomLoader.AdvancedGTMaterials.ZPM.getCircuit(),
 						'W', GT_CustomLoader.AdvancedGTMaterials.ZPM.getCable4()});
 
-		GT_ModHandler.addCraftingRecipe(ItemList.Machine_UV_Massfab.get(1L),
+		GT_ModHandler.addCraftingRecipe(CustomItemList.MassFabricatorUV.get(1L),
 				bitsd,
 				new Object[] { "CFC", "WMW", "CFC",
 						'M', ItemList.Hull_UV,
@@ -1992,7 +1992,7 @@ public class GT_Loader_Machines
 						'M', ItemList.Hull_LuV,
 						'T', ItemList.Emitter_LuV,
 						'R', ItemList.Sensor_LuV,
-						'C', GT_CustomLoader.AdvancedGTMaterials.LuV.getCircuit(),
+						'C', GT_CustomLoader.AdvancedGTMaterials.ZPM.getCircuit(),
 						'W', GT_CustomLoader.AdvancedGTMaterials.LuV.getCable() });
 
 		GT_ModHandler.addCraftingRecipe(CustomItemList.ScannerZPM.get(1L),
@@ -2001,7 +2001,7 @@ public class GT_Loader_Machines
 						'M', ItemList.Hull_ZPM,
 						'T', ItemList.Emitter_ZPM,
 						'R', ItemList.Sensor_ZPM,
-						'C', GT_CustomLoader.AdvancedGTMaterials.ZPM.getCircuit(),
+						'C', GT_CustomLoader.AdvancedGTMaterials.UV.getCircuit(),
 						'W', GT_CustomLoader.AdvancedGTMaterials.ZPM.getCable() });
 
 		GT_ModHandler.addCraftingRecipe(CustomItemList.ScannerUV.get(1L),
@@ -2010,7 +2010,7 @@ public class GT_Loader_Machines
 						'M', ItemList.Hull_UV,
 						'T', ItemList.Emitter_UV,
 						'R', ItemList.Sensor_UV,
-						'C', GT_CustomLoader.AdvancedGTMaterials.UV.getCircuit(),
+						'C', OrePrefixes.circuit.get(Materials.Infinite),
 						'W', GT_CustomLoader.AdvancedGTMaterials.UV.getCable() });
 
 		GT_ModHandler.addCraftingRecipe(CustomItemList.ScannerUHV.get(1L),
@@ -2019,7 +2019,7 @@ public class GT_Loader_Machines
 						'M', ItemList.Hull_MAX,
 						'T', ItemList.Emitter_UHV,
 						'R', ItemList.Sensor_UHV,
-						'C', OrePrefixes.circuit.get(Materials.Infinite),
+						'C', OrePrefixes.circuit.get(Materials.Bio),
 						'W', OrePrefixes.cableGt01.get(Materials.Bedrockium) });
 
 		GT_ModHandler.addCraftingRecipe(CustomItemList.ScannerUEV.get(1L),
@@ -2028,7 +2028,7 @@ public class GT_Loader_Machines
 						'M', CustomItemList.Hull_UEV,
 						'T', ItemList.Emitter_UEV,
 						'R', ItemList.Sensor_UEV,
-						'C', OrePrefixes.circuit.get(Materials.Bio),
+						'C', OrePrefixes.circuit.get(Materials.Nano),
 						'W', OrePrefixes.cableGt01.get(Materials.Draconium) });
 		//ScannerLuV
 		//ScannerZPM
@@ -3742,25 +3742,12 @@ public class GT_Loader_Machines
 		// ===================================================================================================
 		// Dynamo Hatches
 		// ===================================================================================================
+		//See TT for recipes UEV-UMV
 		CustomItemList.Hatch_Dynamo_UEV.set(new GT_MetaTileEntity_Hatch_Dynamo(
 				11290, "hatch.dynamo.tier.10", "UEV Dynamo Hatch",10).getStackForm(1L));
 
-		GT_ModHandler.addCraftingRecipe(CustomItemList.Hatch_Dynamo_UEV.get(1L),
-				bitsd,
-				new Object[]{" MC",
-						'M', CustomItemList.Hull_UEV,
-						'C', OrePrefixes.wireGt01.get(Materials.Draconium)});
-
-
 		CustomItemList.Hatch_Dynamo_UIV.set(new GT_MetaTileEntity_Hatch_Dynamo(
 				11291, "hatch.dynamo.tier.11", "UIV Dynamo Hatch",11).getStackForm(1L));
-
-		GT_ModHandler.addCraftingRecipe(CustomItemList.Hatch_Dynamo_UIV.get(1L),
-				bitsd,
-				new Object[]{" MC",
-						'M', CustomItemList.Hull_UIV,
-						'C', OrePrefixes.wireGt01.get(Materials.NetherStar)});
-
 
 		CustomItemList.Hatch_Dynamo_UMV.set(new GT_MetaTileEntity_Hatch_Dynamo(
 				11292, "hatch.dynamo.tier.12", "UMV Dynamo Hatch",12).getStackForm(1L));
@@ -3771,43 +3758,18 @@ public class GT_Loader_Machines
 		CustomItemList.Hatch_Dynamo_OPV.set(new GT_MetaTileEntity_Hatch_Dynamo(
 				11294, "hatch.dynamo.tier.14", "OPV Dynamo Hatch",14).getStackForm(1L));
 
-		//TODO:Recipes
-
 		// ===================================================================================================
 		// Energy Hatches
 		// ===================================================================================================
+		//See TT for recipes
 		CustomItemList.Hatch_Energy_UEV.set(new GT_MetaTileEntity_Hatch_Energy(
 				11300, "hatch.energy.tier.10", "UEV Energy Hatch",10).getStackForm(1L));
-
-
-		GT_ModHandler.addCraftingRecipe(CustomItemList.Hatch_Energy_UEV.get(1L),
-				bitsd,
-				new Object[]{"CM ",
-						'M', CustomItemList.Hull_UEV,
-						'C', OrePrefixes.wireGt01.get(Materials.Draconium)});
-
 
 		CustomItemList.Hatch_Energy_UIV.set(new GT_MetaTileEntity_Hatch_Energy(
 				11301, "hatch.energy.tier.11", "UIV Energy Hatch",11).getStackForm(1L));
 
-
-		GT_ModHandler.addCraftingRecipe(CustomItemList.Hatch_Energy_UIV.get(1L),
-				bitsd,
-				new Object[]{"CM ",
-						'M', CustomItemList.Hull_UIV,
-						'C', OrePrefixes.wireGt01.get(Materials.NetherStar)});
-
-
 		CustomItemList.Hatch_Energy_UMV.set(new GT_MetaTileEntity_Hatch_Energy(
 				11302, "hatch.energy.tier.12", "UMV Energy Hatch",12).getStackForm(1L));
-
-
-		GT_ModHandler.addCraftingRecipe(CustomItemList.Hatch_Energy_UMV.get(1L),
-				bitsd,
-				new Object[]{"CM ",
-						'M', CustomItemList.Hull_UMV,
-						'C', OrePrefixes.wireGt01.get(Materials.Quantium)});
-
 
 		// ===================================================================================================
 		// Wet Transformers
@@ -4321,7 +4283,7 @@ public class GT_Loader_Machines
 		//CustomItemList.Battery_TurboCharger_4by4_MAXV.set(new GT_MetaTileEntity_TurboCharger(
 		//		12055, "batteryturbocharger.16.tier.15", "Maximum Turbo Charger",15,"64A in /16A out", 4).getStackForm(1L));
 
-		
+
 
 		//TODO add Conveyor Modules for more Tiers
 		// ===================================================================================================
@@ -4557,7 +4519,7 @@ public class GT_Loader_Machines
 		// ===================================================================================================
 		// Input Hatches
 		// ===================================================================================================
-		
+
 		CustomItemList.Hatch_Input_UEV.set(new GT_MetaTileEntity_Hatch_Input(12097, "hatch.input.tier.10", "Input Hatch (UEV)",10).getStackForm(1L));
 		CustomItemList.Hatch_Input_UIV.set(new GT_MetaTileEntity_Hatch_Input(12098, "hatch.input.tier.11", "Input Hatch (UIV)",11).getStackForm(1L));
 		CustomItemList.Hatch_Input_UMV.set(new GT_MetaTileEntity_Hatch_Input(12099, "hatch.input.tier.12", "Input Hatch (UMV)",12).getStackForm(1L));
